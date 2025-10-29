@@ -13,6 +13,6 @@ class Greetings
 
     public function sayHello(): string
     {
-        return "Hello, {$this->to}!";
+        return "Hello, $this->to!";
     }
 }
