@@ -14,10 +14,15 @@ class Account
     {
         $this->accountId = $accountId;
 
+        $host = getenv('DB_HOST') ?: 'localhost';
+        $dbname = getenv('DB_NAME') ?: 'bank_kata';
+        $user = getenv('DB_USER') ?: 'root';
+        $password = getenv('DB_PASSWORD') ?: 'password';
+
         $this->db = new PDO(
-            'mysql:host=localhost;dbname=bank_kata',
-            'root',
-            'password'
+            "mysql:host=$host;dbname=$dbname",
+            $user,
+            $password
         );
 
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

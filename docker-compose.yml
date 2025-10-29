@@ -5,3 +5,35 @@ services:
       dockerfile: Dockerfile
     container_name: leanmind-phpunit
     command: test
+
+  bank-kata:
+    image: php:8.4-cli
+    container_name: bank-kata-app
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+      - DB_NAME=bank_kata
+      - DB_USER=root
+      - DB_PASSWORD=secret
+    command: bash -c "docker-php-ext-install pdo pdo_mysql && php -S 0.0.0.0:8000 -t src/BankKata"
+
+  mysql:
+    image: mysql:8.0
+    container_name: bank-kata-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: bank_kata
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./src/BankKata/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+
+volumes:
+  mysql_data:

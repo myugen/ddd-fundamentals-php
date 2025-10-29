@@ -17,15 +17,47 @@ Esta es una implementación intencionadamente mala del Bank Kata para demostrar 
 
 ## Configuración
 
-### Prerequisitos
+### Opción 1: Docker (Recomendado)
+
+Esta es la forma más sencilla de ejecutar el proyecto.
+
+#### Prerequisitos
+- Docker
+- Docker Compose
+
+#### Ejecutar con Docker
+
+```bash
+docker-compose up bank-kata
+```
+
+La aplicación estará disponible en `http://localhost:8000`
+
+Para detener los servicios:
+```bash
+docker-compose down
+```
+
+Para eliminar también los datos de la base de datos:
+```bash
+docker-compose down -v
+```
+
+### Opción 2: Instalación Local
+
+#### Prerequisitos
 - PHP 8.0 o superior
 - Base de datos MySQL
 - Composer
 
-### Configuración de la Base de Datos
+#### Configuración de la Base de Datos
 
 1. Iniciar el servidor MySQL
-2. Actualizar las credenciales en `src/BankKata/Account.php` si es necesario (líneas 18-20)
+2. Configurar las variables de entorno (opcional):
+   - `DB_HOST` (default: localhost)
+   - `DB_NAME` (default: bank_kata)
+   - `DB_USER` (default: root)
+   - `DB_PASSWORD` (default: password)
 3. La base de datos y la tabla se crearán automáticamente en el primer uso
 
 Alternativamente, ejecuta el script de configuración:
@@ -33,13 +65,13 @@ Alternativamente, ejecuta el script de configuración:
 mysql -u root -p < src/BankKata/setup.sql
 ```
 
-### Instalación
+#### Instalación
 
 ```bash
 composer install
 ```
 
-## Ejecutar la API
+#### Ejecutar la API
 
 Inicia el servidor integrado de PHP:
 
