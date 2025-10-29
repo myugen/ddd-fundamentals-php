@@ -1,6 +1,11 @@
 {
     "name": "leanmind/php-boilerplate",
 
+    "require": {
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*"
+    },
+
     "autoload": {
         "psr-4": {
             "LeanMind\\": "src/"
