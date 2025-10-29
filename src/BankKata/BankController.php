@@ -24,7 +24,7 @@ class BankController
                 $this->balance();
             } else {
                 http_response_code(404);
-                echo json_encode(['error' => 'Not found']);
+                echo json_encode(['error' => 'Not found', 'path' => $path]);
             }
         } catch (Exception $e) {
             http_response_code(500);
